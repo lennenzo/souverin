@@ -1,57 +1,61 @@
-# SOUVERAIN — V1
+# SOUVERAIN EUROPE — V2
 
-Jeu de stratégie et de diplomatie RP en français. 8 pays fictifs, 48 provinces, carte en relief calculée en 3D, économie, constructions, recrutements, mouvements, combats, accords, IA et journal RP.
+Jeu de stratégie et de diplomatie RP en français. Nouvelle version entièrement refaite autour d'une carte de l'Europe en plein écran, de panneaux contextuels et d'opérations rapides.
 
-## Jouer immédiatement
+**Pour jouer : ouvrir index.html. Pour publier et connecter les salons : lire INSTALLATION.md.**
 
-Ouvrir `index.html` dans Chrome, Edge ou Firefox. Tous les fichiers doivent rester dans le même dossier. Aucune installation, aucun compte ni clé API. Si le navigateur bloque la sauvegarde locale d'un fichier ouvert directement, utiliser Exporter la partie, ou jouer sur le site publié.
+## Dans cette version
 
-## Publier sur Vercel avec GitHub
+- 28 pays européens, 72 secteurs stratégiques autour de villes réelles.
+- Frontières Natural Earth au 1:50 millions, embarquées dans le projet : pas de tuiles externes ni d'abonnement cartographique.
+- Panoramique, zoom à la molette et au doigt, recherche de ville/pays, couche politique/terrain.
+- Figurés d'infanterie, blindés et avions ; trajets visibles sur la carte.
+- Budget, industrie, carburant, ravitaillement, impôts, priorités nationales et soutien populaire.
+- Six types d'infrastructures, trois niveaux par bâtiment, trois préparations maximum par secteur.
+- Recrutement de 18 à 40 secondes ; constructions de 30 à 50 secondes ; déplacements de 6 à 85 secondes selon distance et type.
+- Relations, délégations, commerce, alliances, déclarations de guerre, cessez-le-feu et propositions à signer.
+- Messages publics ou bilatéraux et communiqués RP.
+- Entraînement immédiat : gouvernements simulés, sauvegarde locale, import/export, pause et ×1 / ×2 / ×4.
+- Salons partagés après configuration Supabase : pays réservés par joueur, état serveur, refus des actions non autorisées, messages privés filtrés côté serveur, productions et ordres rattrapés à la connexion.
 
-1. Extraire le ZIP.
-2. Créer un dépôt GitHub, privé si souhaité.
-3. Ajouter les fichiers CONTENUS dans le dossier `souverain` à la racine du dépôt : index.html, style.css, engine.js, app.js, icon.svg, vercel.json et README.md. Ne pas ajouter le ZIP lui-même.
-4. Dans Vercel, choisir Add New → Project et importer le dépôt.
-5. Framework Preset : Other. Root Directory : racine du dépôt. Build Command : vide, Override activé si nécessaire. Output Directory : `.` (point). Install Command : vide.
-6. Deploy. Le jeu est disponible à l'adresse de votre projet. Les prochains commits mettent à jour le site.
+## Règles principales
 
-Le projet est entièrement statique et ne dépend d'aucun CDN.
+Les ressources sont produites en continu. Les revenus affichés correspondent à une minute de jeu. Les dépenses de construction/recrutement sont prélevées à la commande. Annuler rembourse 75 %. Un chantier sur un secteur perdu est abandonné à son échéance.
 
-## Commandes
+Les unités en mouvement restent entretenues. Une pénurie de ravitaillement réduit l'attaque de 35 %. Une popularité sous 30 % réduit les recettes de 30 %. Les services publics améliorent le soutien et ont un coût.
 
-- Sélection : clic / toucher une province. Liste accessible sous la carte.
-- Déplacement de carte : glisser. Zoom : molette, boutons + / −.
-- 3D / 2D : bouton dans la carte. Recentrer : ⌖.
-- Clavier sur la carte : flèches pour sélectionner une province, Entrée pour son panneau.
-- Temps : ▶, ×1 / ×2 / ×4, ou Jour suivant.
-- Économie : impôts, politique, bâtiments et marché.
-- Forces armées : recrutement et déplacement vers une province voisine. Toutes les unités de la province partent ensemble.
-- Diplomatie : délégations, aides, commerce, alliances, guerre et cessez-le-feu.
-- Journal : communiqués RP et événements du monde.
-- Paramètres : import / export de sauvegarde JSON.
+Une unité se déplace à travers ses propres secteurs ou ceux des alliés. Le dernier secteur peut être adverse uniquement en guerre. Les liaisons de mer sont des routes stratégiques définies dans le jeu. Les appareils aériens utilisent également ces routes dans cette version ; ils ne contournent pas librement les frontières.
 
-## Règles
+Un combat est résolu à l'arrivée : puissance de l'unité attaquante contre la somme de la défense présente. Fortification : +25 % par niveau ; montagne : +20 %. Une offensive victorieuse capture le secteur et inflige des dégâts au vainqueur. Une offensive perdue détruit l'unité attaquante. Plusieurs ordres sont résolus individuellement, sans fusion automatique en une armée.
 
-Une journée dure 60 secondes à vitesse ×1, 30 à ×2, 15 à ×4. La partie commence en pause. La simulation se suspend si un dialogue est ouvert ou si l'onglet est masqué. Elle ne continue pas quand le navigateur est fermé.
+Un accord commercial rapporte +90 crédits et +8 industrie/min à chaque pays. Une alliance autorise le transit ; elle ne déclenche pas d'intervention automatique. Une déclaration de guerre rompt les accords et retire 6 points de soutien. Le cessez-le-feu interdit une nouvelle déclaration pendant 90 secondes.
 
-6 provinces par nation. Objectif : posséder 30 provinces. Perdre le dernier territoire termine la partie.
+Les pays simulés acceptent le commerce à partir de 45 relations, une alliance à partir de 70 ; une délégation coûte 300 crédits et ajoute 15 points. Réponse automatique après 8 secondes. Un joueur réel choisit librement de signer ou refuser. Les cessez-le-feu sont automatiquement acceptés par les gouvernements non joués.
 
-Les bâtiments produisent chaque jour ; 4 emplacements par province, un exemplaire de chaque bâtiment maximum. Annuler un chantier ou recrutement rembourse 75 % du coût. Les coûts sont retirés à la commande, les revenus à la journée suivante. Un chantier sur une province occupée par un adversaire est perdu à son échéance.
+En entraînement, les simulations adverses vérifient leurs opérations toutes les 15 secondes, recrutent si leurs moyens le permettent et attaquent les secteurs ennemis voisins s'ils estiment pouvoir gagner. Elles ne déclarent pas de guerres spontanées.
 
-Les unités consomment des crédits et de la nourriture ; les blindés consomment aussi du carburant. Les troupes en transit restent entretenues. Une pénurie de nourriture réduit la puissance d'attaque et la popularité. Une popularité sous 30 % réduit les recettes de 30 %.
+Victoire : contrôler 40 secteurs. Si un pays perd tous ses secteurs, il ne peut plus donner d'ordres. Il est toujours possible de lancer un nouvel entraînement.
 
-Déplacement : 2 jours, 3 vers une montagne. Coût : 8 carburant + 4 par unité de blindés. Attaque possible uniquement en guerre. Fortification : +30 % défense, montagne : +20 %. Une attaque victorieuse conserve une partie de ses effectifs ; une attaque perdue détruit la force engagée. Si la paix est conclue pendant le trajet, l'armée rentre dans une province amie.
+## Limites explicites
 
-IA : tous les 4 jours, chaque pays recrute de l'infanterie dans une province ; tous les 12 jours, il ajoute un blindé. En guerre, il tente une contre-attaque frontalière si sa garnison est suffisamment forte. L'IA ne déclare pas spontanément de guerre dans cette V1.
+Carte tactique **2D avec relief graphique**, sans caméra 3D libre. Les contours nationaux sont géographiques ; les secteurs et liaisons tracées sont des zones et chemins de jeu, pas les régions administratives ou routes exactes.
 
-Commerce : accepté en paix à 45 relations. Alliance : acceptée à 75 relations. Réponse après 2 jours. Alliance = statut diplomatique, sans intervention automatique. Cessez-le-feu : 65 % de chance d'acceptation et 5 jours de trêve. Les délégations coûtent 100 crédits (+15 relations), les aides 200 crédits et 20 nourriture (+25 relations).
+Ce scénario fictif ne reproduit pas les effectifs, budgets, dirigeants ou conflits réels. Pas encore d'élections, de ministres joueurs, de recherche technologique, de navires, d'espionnage ou de brouillard de guerre. Les tailles des pays diffèrent ; ce premier scénario n'est pas équilibré pour une compétition classée.
 
-## Sauvegardes et limites
+Entraînement : pause à l'ouverture d'un dialogue et lorsque l'onglet est caché. Aucun calcul après fermeture.
 
-V1 SOLO. Sept dirigeants simulés, pas de véritables joueurs connectés. Chaque navigateur a sa partie indépendante. Les communiqués ne sont pas visibles par d'autres visiteurs. Importer une sauvegarde remplace la partie locale.
+En salon : temps commun, synchronisation toutes les 3 secondes, rattrapage à la lecture suivante (24 h maximum). Pas de serveur exécutant des tâches en permanence, de notifications push, ni de compte récupérable après effacement des données du navigateur. Les gouvernements non joués restent neutres et n'effectuent pas d'opérations autonomes dans ce mode.
 
-La carte est un rendu 3D stylisé par projection orthographique sur canvas (terrains extrudés, volumes des capitales et bâtiments), pas un moteur 3D avec caméra libre.
+## Fichiers
 
-Pas encore de comptes, serveurs persistants, élections, espionnage, brouillard de guerre, navires ou aéronefs. Pour du multijoueur réel, il faut une base de données, une authentification et une simulation serveur qui valide les actions et synchronise les joueurs. Une sauvegarde locale ne doit jamais servir d'autorité à un futur mode compétitif.
+- index.html, style.css : présentation.
+- assets/world.js : géographie ; assets/emblem.svg : emblème.
+- engine.js : simulation d'entraînement, règles et validation des sauvegardes.
+- app.js : carte, interface et interactions.
+- network.js : session anonyme et appels RPC.
+- config.js : URL et clé PUBLIQUE Supabase uniquement.
+- supabase.sql : migration et moteur multijoueur autoritaire.
+- vercel.json : configuration statique.
+- INSTALLATION.md : guide de publication et de configuration.
 
-Aucun contenu ni visuel de Call of War utilisé. Univers et code originaux.
+Aucun code ni visuel de Call of War utilisé. Fond cartographique Natural Earth, domaine public. Code et interface créés pour ce projet.
